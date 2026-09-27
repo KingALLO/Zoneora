@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Zoneora.WindowsIntegration/1.0.0": {
+        "dependencies": {
+          "Zoneora.Core": "1.0.0",
+          "Zoneora.Services": "1.0.0"
+        },
+        "runtime": {
+          "Zoneora.WindowsIntegration.dll": {}
+        }
+      },
+      "Zoneora.Core/1.0.0": {
+        "runtime": {
+          "Zoneora.Core.dll": {}
+        }
+      },
+      "Zoneora.Services/1.0.0": {
+        "dependencies": {
+          "Zoneora.Core": "1.0.0"
+        },
+        "runtime": {
+          "Zoneora.Services.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Zoneora.WindowsIntegration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Zoneora.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Zoneora.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

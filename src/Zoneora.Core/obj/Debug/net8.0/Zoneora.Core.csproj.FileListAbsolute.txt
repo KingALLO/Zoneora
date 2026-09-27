@@ -1,0 +1,12 @@
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\bin\Debug\net8.0\Zoneora.Core.deps.json
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\bin\Debug\net8.0\Zoneora.Core.dll
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\bin\Debug\net8.0\Zoneora.Core.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.AssemblyInfoInputs.cache
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.AssemblyInfo.cs
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.csproj.CoreCompileInputs.cache
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.sourcelink.json
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.dll
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\refint\Zoneora.Core.dll
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\Zoneora.Core.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\src\Zoneora.Core\obj\Debug\net8.0\ref\Zoneora.Core.dll

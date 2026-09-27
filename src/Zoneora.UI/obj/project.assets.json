@@ -1,0 +1,148 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "Zoneora.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Zoneora.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Zoneora.Core.dll": {}
+        }
+      },
+      "Zoneora.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Zoneora.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Zoneora.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Zoneora.Services.dll": {}
+        }
+      },
+      "Zoneora.WindowsIntegration/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Zoneora.Core": "1.0.0",
+          "Zoneora.Services": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Zoneora.WindowsIntegration.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Zoneora.WindowsIntegration.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
+  },
+  "libraries": {
+    "Zoneora.Core/1.0.0": {
+      "type": "project",
+      "path": "../Zoneora.Core/Zoneora.Core.csproj",
+      "msbuildProject": "../Zoneora.Core/Zoneora.Core.csproj"
+    },
+    "Zoneora.Services/1.0.0": {
+      "type": "project",
+      "path": "../Zoneora.Services/Zoneora.Services.csproj",
+      "msbuildProject": "../Zoneora.Services/Zoneora.Services.csproj"
+    },
+    "Zoneora.WindowsIntegration/1.0.0": {
+      "type": "project",
+      "path": "../Zoneora.WindowsIntegration/Zoneora.WindowsIntegration.csproj",
+      "msbuildProject": "../Zoneora.WindowsIntegration/Zoneora.WindowsIntegration.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "Zoneora.Core >= 1.0.0",
+      "Zoneora.Services >= 1.0.0",
+      "Zoneora.WindowsIntegration >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\anilc\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.UI\\Zoneora.UI.csproj",
+      "projectName": "Zoneora.UI",
+      "projectPath": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.UI\\Zoneora.UI.csproj",
+      "packagesPath": "C:\\Users\\anilc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.UI\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\anilc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {
+            "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.Core\\Zoneora.Core.csproj": {
+              "projectPath": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.Core\\Zoneora.Core.csproj"
+            },
+            "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.Services\\Zoneora.Services.csproj": {
+              "projectPath": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.Services\\Zoneora.Services.csproj"
+            },
+            "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.WindowsIntegration\\Zoneora.WindowsIntegration.csproj": {
+              "projectPath": "C:\\Users\\anilc\\Desktop\\Programmierung\\Zoneora\\src\\Zoneora.WindowsIntegration\\Zoneora.WindowsIntegration.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

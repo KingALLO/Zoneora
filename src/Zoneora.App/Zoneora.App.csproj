@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zoneora.Core\Zoneora.Core.csproj" />
+    <ProjectReference Include="..\Zoneora.WindowsIntegration\Zoneora.WindowsIntegration.csproj" />
+    <ProjectReference Include="..\Zoneora.Services\Zoneora.Services.csproj" />
+    <ProjectReference Include="..\Zoneora.UI\Zoneora.UI.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>..\assets\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+</Project>
