@@ -15,8 +15,7 @@ public partial class ZoneControl : UserControl
     private const double GridColumns = 12;
     private const double GridRows = 8;
     private const int MinSpan = 1;
-    private static readonly TimeSpan InitialVisibleDuration = TimeSpan.FromSeconds(5);
-    private static readonly TimeSpan HoverVisibleDuration = TimeSpan.FromMinutes(3);
+    private static readonly TimeSpan AutoHideDelay = TimeSpan.FromSeconds(10);
     private static readonly TimeSpan FadeDuration = TimeSpan.FromMilliseconds(400);
     private readonly Canvas hostCanvas;
     private Point dragStart;
@@ -38,7 +37,7 @@ public partial class ZoneControl : UserControl
         Loaded += (_, _) =>
         {
             ApplyGridBounds();
-            ScheduleAutoHide(InitialVisibleDuration);
+            ScheduleAutoHide(AutoHideDelay);
         };
     }
 
@@ -174,7 +173,7 @@ public partial class ZoneControl : UserControl
             PreviewMouseMove -= OnBuildModeMouseMove;
             shiftHeld = false;
             UpdateEdgeButtonLabels();
-            ScheduleAutoHide(InitialVisibleDuration);
+            ScheduleAutoHide(AutoHideDelay);
         }
     }
 
@@ -201,10 +200,12 @@ public partial class ZoneControl : UserControl
 
     private void OnZoneMouseEnter(object sender, MouseEventArgs e) => KeepVisible();
 
+    private void OnZoneMouseLeave(object sender, MouseEventArgs e) => ScheduleAutoHide(AutoHideDelay);
+
     private void KeepVisible()
     {
         FadeTo(1.0);
-        ScheduleAutoHide(HoverVisibleDuration);
+        CancelAutoHideTimer();
     }
 
     private void ScheduleAutoHide(TimeSpan delay)

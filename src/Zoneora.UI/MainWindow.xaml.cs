@@ -17,6 +17,7 @@ public partial class MainWindow : Window
     private bool isLoadingSettings;
     private readonly TrayIconController trayIcon = new();
     private readonly DesktopIconController desktopIconController = new();
+    private readonly WindowsStartupController startupController = new();
 
     public MainWindow()
     {
@@ -79,55 +80,9 @@ public partial class MainWindow : Window
 
     private void UpdateSettingsControls()
     {
-        OledEnabledCheckBox.IsChecked = settings.OledMode.Enabled;
-        FadeInComboBox.SelectedIndex = FindDurationIndex(FadeInComboBox, settings.OledMode.FadeInMilliseconds);
-        FadeOutComboBox.SelectedIndex = FindDurationIndex(FadeOutComboBox, settings.OledMode.FadeOutMilliseconds);
-        IdleTimeoutComboBox.SelectedIndex = settings.OledMode.IdleTimeoutMinutes is int minutes
-            ? FindTagIndex(IdleTimeoutComboBox, minutes.ToString())
-            : FindTagIndex(IdleTimeoutComboBox, "never");
-        HideZonesCheckBox.IsChecked = settings.OledMode.HideZones;
-        HideDesktopIconsCheckBox.IsChecked = settings.OledMode.HideDesktopIcons;
-        DisableFullscreenCheckBox.IsChecked = settings.OledMode.DisableInFullscreenApps;
         ShowGridCheckBox.IsChecked = settings.ShowGrid;
         HideDesktopIconsNowCheckBox.IsChecked = settings.DesktopIconsHidden;
-    }
-
-    private async void OnOledSettingChanged(object sender, RoutedEventArgs e)
-    {
-        if (isLoadingSettings)
-        {
-            return;
-        }
-
-        settings.OledMode.Enabled = OledEnabledCheckBox.IsChecked == true;
-        settings.OledMode.HideZones = HideZonesCheckBox.IsChecked == true;
-        settings.OledMode.HideDesktopIcons = HideDesktopIconsCheckBox.IsChecked == true;
-        settings.OledMode.DisableInFullscreenApps = DisableFullscreenCheckBox.IsChecked == true;
-        await settingsManager.SaveAsync(settings);
-    }
-
-    private async void OnOledSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-    {
-        if (isLoadingSettings)
-        {
-            return;
-        }
-
-        if (FadeInComboBox.SelectedItem is System.Windows.Controls.ComboBoxItem fadeIn && int.TryParse(fadeIn.Tag?.ToString(), out int fadeInMilliseconds))
-        {
-            settings.OledMode.FadeInMilliseconds = fadeInMilliseconds;
-        }
-        if (FadeOutComboBox.SelectedItem is System.Windows.Controls.ComboBoxItem fadeOut && int.TryParse(fadeOut.Tag?.ToString(), out int fadeOutMilliseconds))
-        {
-            settings.OledMode.FadeOutMilliseconds = fadeOutMilliseconds;
-        }
-        if (IdleTimeoutComboBox.SelectedItem is System.Windows.Controls.ComboBoxItem idleTimeout)
-        {
-            settings.OledMode.IdleTimeoutMinutes = idleTimeout.Tag?.ToString() == "never"
-                ? null
-                : int.Parse(idleTimeout.Tag!.ToString()!);
-        }
-        await settingsManager.SaveAsync(settings);
+        StartWithWindowsCheckBox.IsChecked = startupController.IsEnabled();
     }
 
     private void OnDesktopViewClick(object sender, RoutedEventArgs e)
@@ -178,6 +133,16 @@ public partial class MainWindow : Window
         await settingsManager.SaveAsync(settings);
     }
 
+    private void OnStartWithWindowsChanged(object sender, RoutedEventArgs e)
+    {
+        if (isLoadingSettings)
+        {
+            return;
+        }
+
+        startupController.SetEnabled(StartWithWindowsCheckBox.IsChecked == true);
+    }
+
     private void OnBuildModeClick(object sender, RoutedEventArgs e)
     {
         bool enabled = BuildModeToggle.IsChecked == true;
@@ -204,22 +169,4 @@ public partial class MainWindow : Window
     }
 
     private void OnCloseClick(object sender, RoutedEventArgs e) => Close();
-
-    private static int FindDurationIndex(System.Windows.Controls.ComboBox comboBox, int duration)
-    {
-        return FindTagIndex(comboBox, duration.ToString());
-    }
-
-    private static int FindTagIndex(System.Windows.Controls.ComboBox comboBox, string tag)
-    {
-        for (int index = 0; index < comboBox.Items.Count; index++)
-        {
-            if (comboBox.Items[index] is System.Windows.Controls.ComboBoxItem item && item.Tag?.ToString() == tag)
-            {
-                return index;
-            }
-        }
-
-        return 0;
-    }
 }

@@ -5,6 +5,7 @@
              MinHeight="90"
              AllowDrop="True"
              MouseEnter="OnZoneMouseEnter"
+             MouseLeave="OnZoneMouseLeave"
              DragOver="OnDragOver"
              Drop="OnDrop">
     <Grid>
