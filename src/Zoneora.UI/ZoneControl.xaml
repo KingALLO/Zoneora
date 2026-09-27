@@ -7,7 +7,10 @@
              MouseEnter="OnZoneMouseEnter"
              DragOver="OnDragOver"
              Drop="OnDrop">
-    <Border Background="#E8172024" BorderBrush="#66818B" BorderThickness="1" CornerRadius="10" Padding="1">
+    <Grid>
+        <!-- always alpha>0 so the layered desktop window keeps hit-testing this area even while VisualContent is faded to 0 -->
+        <Rectangle Fill="#01000000" />
+        <Border x:Name="VisualContent" Background="#E8172024" BorderBrush="#66818B" BorderThickness="1" CornerRadius="10" Padding="1">
         <Grid MouseLeftButtonDown="OnZoneMouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="34" />
@@ -24,13 +27,13 @@
                 </Grid>
             </Border>
             <ScrollViewer Grid.Row="1" Margin="8" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="ItemsList">
+                <ItemsControl x:Name="ItemsList" AllowDrop="True" DragOver="OnItemDragOver" Drop="OnItemsListDrop">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Width="78" Height="78" Margin="2" Background="#142A3033" BorderThickness="0" Foreground="#F2F4EE" ToolTip="{Binding DisplayName}" Tag="{Binding}" PreviewMouseLeftButtonDown="OnItemPreviewMouseLeftButtonDown">
+                            <Button Width="78" Height="78" Margin="2" Background="#142A3033" BorderThickness="0" Foreground="#F2F4EE" ToolTip="{Binding DisplayName}" Tag="{Binding}" AllowDrop="True" PreviewMouseLeftButtonDown="OnItemPreviewMouseLeftButtonDown" PreviewMouseMove="OnItemPreviewMouseMove" DragOver="OnItemDragOver" Drop="OnItemDrop">
                                 <StackPanel IsHitTestVisible="False">
                                     <Image Width="30" Height="30" Source="{Binding Icon}" />
                                     <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" TextAlignment="Center" Margin="3,5,3,0" />
@@ -45,5 +48,6 @@
             <Button x:Name="GrowLeftButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-11,0,0,0" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowLeftClick" />
             <Button x:Name="GrowRightButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-11,0" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowRightClick" />
         </Grid>
-    </Border>
+        </Border>
+    </Grid>
 </UserControl>

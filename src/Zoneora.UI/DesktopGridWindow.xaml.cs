@@ -1,7 +1,5 @@
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Zoneora.Core;
@@ -12,10 +10,6 @@ public partial class DesktopGridWindow : Window
 {
     private const int GridColumns = 12;
     private const int GridRows = 8;
-    private const uint SwpNoActivate = 0x0010;
-    private const uint SwpNoMove = 0x0002;
-    private const uint SwpNoSize = 0x0001;
-    private static readonly nint HwndBottom = new(1);
     private readonly List<ZoneControl> controls = [];
     private bool gridVisible;
     private bool buildModeEnabled;
@@ -70,8 +64,7 @@ public partial class DesktopGridWindow : Window
         Width = SystemParameters.WorkArea.Width;
         Height = SystemParameters.WorkArea.Height;
         DrawGrid();
-        nint handle = new WindowInteropHelper(this).Handle;
-        SetWindowPos(handle, HwndBottom, 0, 0, 0, 0, SwpNoMove | SwpNoSize | SwpNoActivate);
+        // non-activated windows are inserted just below the current foreground window, which keeps zones above the desktop and reachable by mouse without stealing focus
     }
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
@@ -125,7 +118,4 @@ public partial class DesktopGridWindow : Window
     }
 
     private void OnDrop(object sender, DragEventArgs e) => e.Handled = true;
-
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern bool SetWindowPos(nint window, nint insertAfter, int x, int y, int width, int height, uint flags);
 }

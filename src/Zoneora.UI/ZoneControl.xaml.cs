@@ -25,6 +25,8 @@ public partial class ZoneControl : UserControl
     private bool shiftHeld;
     private bool buildModeActive;
     private DispatcherTimer? autoHideTimer;
+    private Point itemDragStart;
+    private ItemModel? itemDragCandidate;
 
     public ZoneControl(ZoneModel model, Canvas hostCanvas)
     {
@@ -236,8 +238,9 @@ public partial class ZoneControl : UserControl
 
     private void FadeTo(double target)
     {
+        // animate the inner content only; the UserControl itself must stay hit-testable so hover can wake it again
         DoubleAnimation animation = new(target, FadeDuration);
-        BeginAnimation(OpacityProperty, animation);
+        VisualContent.BeginAnimation(OpacityProperty, animation);
     }
 
     private void OnGrowTopClick(object sender, RoutedEventArgs e)
@@ -395,7 +398,7 @@ public partial class ZoneControl : UserControl
                 Model.Items.Add(new ItemModel { Path = path, DisplayName = System.IO.Path.GetFileName(path) });
             }
         }
-        ItemsList.ItemsSource = Model.Items.Select(ShellItemViewModel.Create).ToList();
+        RefreshItems();
         Changed?.Invoke(this, EventArgs.Empty);
     }
 
@@ -408,8 +411,80 @@ public partial class ZoneControl : UserControl
 
         e.Handled = true;
         KeepVisible();
+
+        if (buildModeActive)
+        {
+            itemDragStart = e.GetPosition(null);
+            itemDragCandidate = viewModel.Source;
+            return;
+        }
+
         OpenItem(viewModel.Source);
     }
+
+    private void OnItemPreviewMouseMove(object sender, MouseEventArgs e)
+    {
+        if (!buildModeActive || itemDragCandidate is null || e.LeftButton != MouseButtonState.Pressed)
+        {
+            return;
+        }
+
+        Point current = e.GetPosition(null);
+        if (Math.Abs(current.X - itemDragStart.X) < SystemParameters.MinimumHorizontalDragDistance &&
+            Math.Abs(current.Y - itemDragStart.Y) < SystemParameters.MinimumVerticalDragDistance)
+        {
+            return;
+        }
+
+        ItemModel dragged = itemDragCandidate;
+        itemDragCandidate = null;
+        DragDrop.DoDragDrop((DependencyObject)sender, dragged, DragDropEffects.Move);
+    }
+
+    private void OnItemDragOver(object sender, DragEventArgs e)
+    {
+        e.Effects = e.Data.GetDataPresent(typeof(ItemModel)) ? DragDropEffects.Move : DragDropEffects.None;
+        e.Handled = true;
+    }
+
+    private void OnItemDrop(object sender, DragEventArgs e)
+    {
+        if (sender is not Button { Tag: ShellItemViewModel targetViewModel } || e.Data.GetData(typeof(ItemModel)) is not ItemModel dragged)
+        {
+            return;
+        }
+
+        e.Handled = true;
+        ReorderItem(dragged, targetViewModel.Source);
+    }
+
+    private void OnItemsListDrop(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetData(typeof(ItemModel)) is not ItemModel dragged)
+        {
+            return;
+        }
+
+        e.Handled = true;
+        ReorderItem(dragged, null);
+    }
+
+    private void ReorderItem(ItemModel dragged, ItemModel? target)
+    {
+        int sourceIndex = Model.Items.IndexOf(dragged);
+        if (sourceIndex < 0 || ReferenceEquals(dragged, target))
+        {
+            return;
+        }
+
+        Model.Items.RemoveAt(sourceIndex);
+        int targetIndex = target is null ? -1 : Model.Items.IndexOf(target);
+        Model.Items.Insert(targetIndex < 0 ? Model.Items.Count : targetIndex, dragged);
+        RefreshItems();
+        Changed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void RefreshItems() => ItemsList.ItemsSource = Model.Items.Select(ShellItemViewModel.Create).ToList();
 
     private static void OpenItem(ItemModel item)
     {
