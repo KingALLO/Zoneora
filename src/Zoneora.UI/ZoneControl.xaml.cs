@@ -45,6 +45,28 @@ public partial class ZoneControl : UserControl
     public event EventHandler? Changed;
     public event EventHandler? CloseRequested;
 
+    public void ApplyAppearance(ZoneAppearanceSettings appearance)
+    {
+        if (appearance.UseTransparentTheme)
+        {
+            VisualContent.Background = new SolidColorBrush(Color.FromArgb(232, 23, 32, 36));
+            VisualContent.BorderBrush = new SolidColorBrush(Color.FromArgb(170, 102, 129, 139));
+            VisualContent.CornerRadius = appearance.RoundedCorners ? new CornerRadius(10) : new CornerRadius(0);
+            TitleBorder.CornerRadius = appearance.RoundedCorners ? new CornerRadius(9, 9, 0, 0) : new CornerRadius(0);
+            return;
+        }
+
+        if (ColorConverter.ConvertFromString(appearance.AccentColor) is not Color color)
+        {
+            color = Color.FromRgb(177, 140, 255);
+        }
+
+        VisualContent.Background = new SolidColorBrush(Color.FromArgb(220, color.R, color.G, color.B));
+        VisualContent.BorderBrush = new SolidColorBrush(Color.FromArgb(230, color.R, color.G, color.B));
+        VisualContent.CornerRadius = appearance.RoundedCorners ? new CornerRadius(10) : new CornerRadius(0);
+        TitleBorder.CornerRadius = appearance.RoundedCorners ? new CornerRadius(9, 9, 0, 0) : new CornerRadius(0);
+    }
+
     public void ApplyGridBounds()
     {
         if (hostCanvas.ActualWidth <= 0 || hostCanvas.ActualHeight <= 0)

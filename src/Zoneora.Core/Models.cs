@@ -55,4 +55,12 @@ public sealed class AppSettings
     public OledModeSettings OledMode { get; set; } = new();
     public bool ShowGrid { get; set; }
     public bool DesktopIconsHidden { get; set; }
+    public ZoneAppearanceSettings Appearance { get; set; } = new();
+}
+
+public sealed class ZoneAppearanceSettings
+{
+    public string AccentColor { get; set; } = "#B18CFF";
+    public bool RoundedCorners { get; set; } = true;
+    public bool UseTransparentTheme { get; set; }
 }

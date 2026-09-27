@@ -44,10 +44,10 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            <Button x:Name="GrowTopButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-11,0,0" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowTopClick" />
-            <Button x:Name="GrowBottomButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-11" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowBottomClick" />
-            <Button x:Name="GrowLeftButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-11,0,0,0" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowLeftClick" />
-            <Button x:Name="GrowRightButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-11,0" Background="#B8F36B" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowRightClick" />
+            <Button x:Name="GrowTopButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-11,0,0" Background="#B18CFF" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowTopClick" />
+            <Button x:Name="GrowBottomButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-11" Background="#B18CFF" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowBottomClick" />
+            <Button x:Name="GrowLeftButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="-11,0,0,0" Background="#B18CFF" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowLeftClick" />
+            <Button x:Name="GrowRightButton" Grid.RowSpan="2" Content="+" Width="22" Height="22" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-11,0" Background="#B18CFF" Foreground="#101518" BorderThickness="0" FontWeight="Bold" Visibility="Collapsed" Click="OnGrowRightClick" />
         </Grid>
         </Border>
     </Grid>

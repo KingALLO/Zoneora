@@ -13,6 +13,7 @@ public partial class DesktopGridWindow : Window
     private readonly List<ZoneControl> controls = [];
     private bool gridVisible;
     private bool buildModeEnabled;
+    private ZoneAppearanceSettings appearance = new();
 
     public DesktopGridWindow(IEnumerable<ZoneModel> zones)
     {
@@ -34,6 +35,7 @@ public partial class DesktopGridWindow : Window
         control.Changed += OnZoneChanged;
         control.CloseRequested += OnZoneCloseRequested;
         control.SetBuildMode(buildModeEnabled);
+        control.ApplyAppearance(appearance);
         controls.Add(control);
         GridCanvas.Children.Add(control);
         control.ApplyGridBounds();
@@ -54,6 +56,15 @@ public partial class DesktopGridWindow : Window
         foreach (ZoneControl control in controls)
         {
             control.SetBuildMode(enabled);
+        }
+    }
+
+    public void SetAppearance(ZoneAppearanceSettings appearance)
+    {
+        this.appearance = appearance;
+        foreach (ZoneControl control in controls)
+        {
+            control.ApplyAppearance(appearance);
         }
     }
 
@@ -91,11 +102,11 @@ public partial class DesktopGridWindow : Window
         double cellHeight = ActualHeight / GridRows;
         for (int column = 1; column < GridColumns; column++)
         {
-            GridCanvas.Children.Insert(0, new Line { X1 = column * cellWidth, X2 = column * cellWidth, Y2 = ActualHeight, Stroke = new SolidColorBrush(Color.FromArgb(35, 184, 243, 107)), StrokeThickness = 1, IsHitTestVisible = false });
+            GridCanvas.Children.Insert(0, new Line { X1 = column * cellWidth, X2 = column * cellWidth, Y2 = ActualHeight, Stroke = new SolidColorBrush(Color.FromArgb(45, 177, 140, 255)), StrokeThickness = 1, IsHitTestVisible = false });
         }
         for (int row = 1; row < GridRows; row++)
         {
-            GridCanvas.Children.Insert(0, new Line { Y1 = row * cellHeight, X2 = ActualWidth, Y2 = row * cellHeight, Stroke = new SolidColorBrush(Color.FromArgb(35, 184, 243, 107)), StrokeThickness = 1, IsHitTestVisible = false });
+            GridCanvas.Children.Insert(0, new Line { Y1 = row * cellHeight, X2 = ActualWidth, Y2 = row * cellHeight, Stroke = new SolidColorBrush(Color.FromArgb(45, 177, 140, 255)), StrokeThickness = 1, IsHitTestVisible = false });
         }
     }
 

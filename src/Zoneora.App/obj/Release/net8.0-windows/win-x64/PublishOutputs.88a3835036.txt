@@ -1,0 +1,7 @@
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.UI.runtimeconfig.json
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.Core.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.WindowsIntegration.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.Services.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.UI.pdb
+C:\Users\anilc\Desktop\Programmierung\Zoneora\publish\Zoneora-win-x64-transparent-theme\Zoneora.exe

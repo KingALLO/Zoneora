@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Zoneora.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f7a2bfb51b1f2a208a78cfe7c47c5c88912bc2b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+678c1407502add65ef5215b136a97a5cd3890bee")]
 [assembly: System.Reflection.AssemblyProductAttribute("Zoneora.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Zoneora.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

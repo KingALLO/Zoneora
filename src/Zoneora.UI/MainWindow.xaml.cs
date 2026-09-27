@@ -42,6 +42,7 @@ public partial class MainWindow : Window
         desktopGrid = new DesktopGridWindow(zoneManager.Zones);
         desktopGrid.Changed += OnGridChanged;
         desktopGrid.SetGridVisible(settings.ShowGrid);
+        desktopGrid.SetAppearance(settings.Appearance);
         desktopGrid.Show();
 
         UpdateStatus();
@@ -83,22 +84,104 @@ public partial class MainWindow : Window
         ShowGridCheckBox.IsChecked = settings.ShowGrid;
         HideDesktopIconsNowCheckBox.IsChecked = settings.DesktopIconsHidden;
         StartWithWindowsCheckBox.IsChecked = startupController.IsEnabled();
+        AccentColorTextBox.Text = settings.Appearance.AccentColor;
+        RoundedCornersCheckBox.IsChecked = settings.Appearance.RoundedCorners;
+        TransparentThemeCheckBox.IsChecked = settings.Appearance.UseTransparentTheme;
     }
 
     private void OnDesktopViewClick(object sender, RoutedEventArgs e)
     {
         DesktopView.Visibility = Visibility.Visible;
         SettingsView.Visibility = Visibility.Collapsed;
-        DesktopViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 243, 107));
+        CustomizationView.Visibility = Visibility.Collapsed;
+        DesktopViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 140, 255));
         SettingsViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(38, 50, 56));
+        CustomizationViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(38, 50, 56));
     }
 
     private void OnSettingsViewClick(object sender, RoutedEventArgs e)
     {
         DesktopView.Visibility = Visibility.Collapsed;
         SettingsView.Visibility = Visibility.Visible;
+        CustomizationView.Visibility = Visibility.Collapsed;
         DesktopViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(38, 50, 56));
-        SettingsViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 243, 107));
+        SettingsViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(177, 140, 255));
+        CustomizationViewButton.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(38, 50, 56));
+    }
+
+    private void OnCustomizationViewClick(object sender, RoutedEventArgs e)
+    {
+        DesktopView.Visibility = Visibility.Collapsed;
+        SettingsView.Visibility = Visibility.Collapsed;
+        CustomizationView.Visibility = Visibility.Visible;
+        SetViewButtonColors(CustomizationViewButton);
+    }
+
+    private void OnAccentPresetClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is System.Windows.Controls.Button { Tag: string color })
+        {
+            AccentColorTextBox.Text = color;
+            ApplyAccentColor(color);
+        }
+    }
+
+    private void OnCustomAccentClick(object sender, RoutedEventArgs e) => ApplyAccentColor(AccentColorTextBox.Text);
+
+    private void ApplyAccentColor(string color)
+    {
+        try
+        {
+            if (System.Windows.Media.ColorConverter.ConvertFromString(color) is not System.Windows.Media.Color)
+            {
+                return;
+            }
+        }
+        catch (FormatException)
+        {
+            return;
+        }
+
+        settings.Appearance.AccentColor = color;
+        desktopGrid?.SetAppearance(settings.Appearance);
+        _ = settingsManager.SaveAsync(settings);
+    }
+
+    private void OnCornerStyleChanged(object sender, RoutedEventArgs e)
+    {
+        if (isLoadingSettings)
+        {
+            return;
+        }
+
+        settings.Appearance.RoundedCorners = RoundedCornersCheckBox.IsChecked == true;
+        desktopGrid?.SetAppearance(settings.Appearance);
+        _ = settingsManager.SaveAsync(settings);
+    }
+
+    private void OnAppearanceChanged(object sender, RoutedEventArgs e)
+    {
+        if (isLoadingSettings)
+        {
+            return;
+        }
+
+        settings.Appearance.UseTransparentTheme = TransparentThemeCheckBox.IsChecked == true;
+        desktopGrid?.SetAppearance(settings.Appearance);
+        _ = settingsManager.SaveAsync(settings);
+    }
+
+    private void SetViewButtonColors(System.Windows.Controls.Button active)
+    {
+        foreach (System.Windows.Controls.Button button in new[] { DesktopViewButton, SettingsViewButton, CustomizationViewButton })
+        {
+            button.Background = new System.Windows.Media.SolidColorBrush(button == active
+                ? System.Windows.Media.Color.FromRgb(177, 140, 255)
+                : System.Windows.Media.Color.FromRgb(38, 50, 56));
+            button.Foreground = new System.Windows.Media.SolidColorBrush(button == active
+                ? System.Windows.Media.Color.FromRgb(16, 21, 24)
+                : System.Windows.Media.Color.FromRgb(242, 244, 238));
+        }
     }
 
     private void OnHeaderMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -148,7 +231,7 @@ public partial class MainWindow : Window
         bool enabled = BuildModeToggle.IsChecked == true;
         desktopGrid?.SetBuildMode(enabled);
         BuildModeToggle.Background = new System.Windows.Media.SolidColorBrush(enabled
-            ? System.Windows.Media.Color.FromRgb(184, 243, 107)
+            ? System.Windows.Media.Color.FromRgb(177, 140, 255)
             : System.Windows.Media.Color.FromRgb(38, 50, 56));
         BuildModeToggle.Foreground = new System.Windows.Media.SolidColorBrush(enabled
             ? System.Windows.Media.Color.FromRgb(16, 21, 24)

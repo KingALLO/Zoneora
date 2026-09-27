@@ -11,6 +11,8 @@ The current application opens one borderless Zoneora control surface and one des
 - .NET 8 WPF solution structure
 - Initial Zoneora desktop UI
 - Desktop-resident control surface with Desktop and Settings views
+- Customization view with lilac, blue, and rose zone colors
+- Custom hex zone colors and rounded or square zone corners
 - A 12 x 8 desktop grid for Zoneora zones
 - Create, move, resize, rename, and close desktop zones
 - Restore zone positions and sizes between launches
@@ -45,13 +47,15 @@ From the repository root:
 dotnet run --project src/Zoneora.App/Zoneora.App.csproj
 ```
 
+For a double-clickable Windows executable, use the published file at `publish\Zoneora-win-x64\Zoneora.exe`. It is self-contained and does not require the .NET runtime to be installed separately.
+
 The current build opens the Zoneora control surface near the lower-right of the desktop and restores the desktop grid. Use the **Desktop** view and click **Create zone** to place a zone in the grid. Double-click a zone's title to rename it; otherwise dragging anywhere inside a zone (including its top edge) moves it to another grid position. Enable **Build Mode** to show a `+` handle on each edge of a zone; clicking a handle grows the zone by one grid unit in that direction. Hold **Shift** while Build Mode is active to turn the handles into `-` handles that shrink the zone edge by edge instead. Drop files or folders into a zone to add them with their Windows shell icons. The grid lines themselves are only visible when **Show desktop grid** is enabled in Settings.
 
 Zones fade out a few seconds after they appear and stay hidden until the mouse moves over them, then fade back in and remain visible for about 3 minutes before fading out again. Build Mode keeps all zones visible while it is active.
 
 Click an item to open it with its normal Windows application. Close a zone with the `x` button in its header. Click the `–` button in the control surface header to minimize Zoneora to the Windows hidden-icons tray area; double-click the tray icon or use its context menu to reopen it. Zone positions, sizes, names, and dropped item paths are saved automatically.
 
-Select **Settings** in the same control surface to hide the standard Windows desktop icons immediately, or configure OLED Mode preferences. Settings are saved automatically; OLED Mode overlay activation is still being connected to the zone windows.
+Select **Settings** in the same control surface to hide the standard Windows desktop icons immediately or enable Zoneora at Windows startup. Select **Customization** to change the zone color and choose rounded or square corners. Settings are saved automatically.
 
 ## Build and Test
 
